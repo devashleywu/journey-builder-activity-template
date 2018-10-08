@@ -8,7 +8,7 @@
     "type": "REST",
     "lang": {
         "en-US": {
-            "name": "Template",
+        "name": "Template",
           "description": "A Template for a custom Journey Builder activity",
           "step1Label": "Configure Activity"
         }
@@ -21,7 +21,7 @@
                 }									
 			],
           "outArguments": [],
-          "url": "https://www.google.com/journeybuilder/execute",
+          "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/execute",
            "verb": "POST",
             "body": "",
             "header": "",
@@ -33,22 +33,22 @@
     "configurationArguments": {
       "applicationExtensionKey": "b705b1df-71ed-4851-858d-0db122e9ccc3",
       "save": {
-        "url": "https:///www.google.com/journeybuilder/save",
+        "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/save",
           "verb": "POST",
         "useJwt": true
        },
        "publish": {
-        "url": "https:///www.google.com/journeybuilder/publish",
+        "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/publish",
            "verb": "POST",
         "useJwt": true
        },
       "stop": {
-        "url": "https:///www.google.com/journeybuilder/stop",
+        "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/stop",
            "verb": "POST",
         "useJwt": true
       },
       "validate": {
-        "url": "https:///www.google.com/journeybuilder/validate",
+        "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/validate",
         "verb": "POST",
         "useJwt": true
       }
