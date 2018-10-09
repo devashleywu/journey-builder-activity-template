@@ -26,7 +26,7 @@ define([
     }
 
     function initialize(data) {
-        console.log(data);
+        console.log('data ' + data);
         if (data) {
             payload = data;
         }
@@ -40,7 +40,7 @@ define([
 
         var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
 
-        console.log(inArguments);
+        console.log('inArguments' + inArguments);
 
         $.each(inArguments, function (index, inArgument) {
             $.each(inArgument, function (key, val) {
@@ -57,12 +57,12 @@ define([
     }
 
     function onGetTokens(tokens) {
-        console.log(tokens);
+        console.log('token ' + tokens);
         authTokens = tokens;
     }
 
     function onGetEndpoints(endpoints) {
-        console.log(endpoints);
+        console.log('endpoints ' + endpoints);
     }
 
     function save() {
@@ -76,9 +76,7 @@ define([
         
         payload['metaData'].isConfigured = true;
 
-        console.log(payload);
+        console.log('payload ' + payload);
         connection.trigger('updateActivity', payload);
     }
-
-
 });
