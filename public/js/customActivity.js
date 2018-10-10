@@ -8,7 +8,12 @@ define([
     var connection = new Postmonger.Session();
     var authTokens = {};
     var payload = {};
-    var intercom = require('createMessage');
+
+    // add intercom vars. 
+    var Intercom = require('intercom-client');
+    var client = new Intercom.Client({ token: process.env.intercom-token });
+
+
     $(window).ready(onRender);
 
     connection.on('initActivity', initialize);
@@ -28,7 +33,9 @@ define([
 
     function initialize(data) {
         console.log('data ' + data);
-        intercom.listUsers();
+        // call intercom list users function.
+        listUsers();
+
         if (data) {
             payload = data;
         }
@@ -81,4 +88,20 @@ define([
         console.log('payload ' + payload);
         connection.trigger('updateActivity', payload);
     }
+
+    function listUsers(){
+        console.log("create users started");
+        client.users.create({
+            email: 'ashleytest@gmail.com',
+            custom_attributes: {
+            foo: 'bar'
+            }
+        }, callback);      
+    }
 });
+
+
+
+
+
+
