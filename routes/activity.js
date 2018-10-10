@@ -6,6 +6,7 @@ const Path = require('path');
 const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
 var util = require('util');
 var http = require('https');
+var Intercom = require('intercom-client');
 
 exports.logExecuteData = [];
 
@@ -72,7 +73,8 @@ exports.save = function (req, res) {
  * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
-
+    console.log('in execute step');
+    console.log('test' + process.env.intercom-token);
     // example on how to decode JWT
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
 
