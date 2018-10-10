@@ -8,6 +8,7 @@ define([
     var connection = new Postmonger.Session();
     var authTokens = {};
     var payload = {};
+    var intercom = require('createMessage');
     $(window).ready(onRender);
 
     connection.on('initActivity', initialize);
@@ -27,6 +28,7 @@ define([
 
     function initialize(data) {
         console.log('data ' + data);
+        intercom.listUsers();
         if (data) {
             payload = data;
         }
