@@ -12,18 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/devsutd/journey-builder-activity-template.git"
   },
-  "keywords": [
-    "journey",
-    "builder",
-    "salesforce marketing cloud",
-    "heroku"
-  ],
   "author": "Devs United",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/devsutd/journey-builder-activity-template/issues"
-  },
-  "homepage": "https://github.com/devsutd/journey-builder-activity-template#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "bower": "^1.8.0",
