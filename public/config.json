@@ -34,17 +34,17 @@
       "applicationExtensionKey": "b705b1df-71ed-4851-858d-0db122e9ccc3",
       "save": {
         "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/save",
-          "verb": "POST",
+        "verb": "POST",
         "useJwt": true
        },
        "publish": {
         "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/publish",
-           "verb": "POST",
+        "verb": "POST",
         "useJwt": true
        },
       "stop": {
         "url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/stop",
-           "verb": "POST",
+        "verb": "POST",
         "useJwt": true
       },
       "validate": {
