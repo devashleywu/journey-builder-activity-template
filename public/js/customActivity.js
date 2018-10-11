@@ -44,7 +44,7 @@ define([
 
         console.log('hasInArguments ' + hasInArguments);
         console.log('inArguments' + inArguments);
-        console.log('inArguments details' + payload['arguments'].execute.inArguments[0].emailAddress);
+        console.log('inArguments details ' + payload['arguments'].execute.inArguments[0].emailAddress);
 
         $.each(inArguments, function (index, inArgument) {
             $.each(inArgument, function (key, val) {
@@ -75,14 +75,14 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "emailAddress": "{{Contact.Attribute.CustomJourney.EmailAddress}}"
+            "emailAddress": "{{Contact.Attribute.Test_DE_Ashley.EmailAddress}}"
         }];
         
         payload['metaData'].isConfigured = true;
 
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
-        console.log('email address contact attribute ', "{{Contact.Attribute.CustomJourney.EmailAddress}}");
+        
         connection.trigger('updateActivity', payload);
     }
 });
