@@ -1,4 +1,5 @@
 {
+    "key": "b705b1df-71ed-4851-858d-0db122e9ccc3",
     "workflowApiVersion": "1.1",
     "metaData": {
         "icon": "images/icon.png",
@@ -17,7 +18,7 @@
         "execute": {
            "inArguments":[
 				{
-                    "emailAddress": "{{Contact.Attribute.CustomActivity.EmailAddress}}"
+                    "emailAddress": "{{Contact.Attribute.Test_DE_Ashley.EmailAddress}}"
                 }									
 			],
           "outArguments": [],
