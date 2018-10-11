@@ -61,6 +61,12 @@
             "height": 400,
             "width": 1000,
           "fullscreen": false
+        },
+        "runningModal": {
+            "url": "runningModal.html"
+        },
+        "runningHover": {
+            "url": "runningHover.html"
         }
     },
     "schema": {
