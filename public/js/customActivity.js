@@ -8,7 +8,7 @@ define([
     var connection = new Postmonger.Session();
     var authTokens = {};
     var payload = {};
-    
+
     $(window).ready(onRender);
 
     connection.on('initActivity', initialize);
@@ -73,7 +73,7 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "emailAddress": "{{Contact.Attribute.PostcardJourney.EmailAddress}}"
+            "emailAddress": "{{Contact.Attribute.CustomJourney.EmailAddress}}"
         }];
         
         payload['metaData'].isConfigured = true;
