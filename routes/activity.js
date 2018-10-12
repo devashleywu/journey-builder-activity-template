@@ -56,7 +56,6 @@ exports.edit = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     console.log('in edit step');
-    console.log('edit test' + process.env.intercom-token);
     logData(req);
     res.send(200, 'Edit');
 };
@@ -76,7 +75,7 @@ exports.save = function (req, res) {
  */
 exports.execute = function (req, res) {
     console.log('in execute step');
-    console.log('test' + process.env.intercom-token);
+    console.log('test' + process.env.intercomToken);
     
     var createUser = {
         "user_id": "testuser1",
@@ -137,7 +136,6 @@ exports.publish = function (req, res) {
 exports.validate = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
-    console.log('validate test ' +  + process.env.intercom-token);
     logData(req);
     res.send(200, 'Validate');
 };
@@ -149,7 +147,6 @@ exports.validate = function (req, res) {
 exports.stop = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
-    // console.log('validate test ' +  + process.env.intercom-token);
     logData(req);
     res.send(200, 'stop');
 };
