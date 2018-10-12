@@ -66,9 +66,9 @@ exports.edit = function (req, res) {
  */
 exports.save = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
-    //console.log( req.body );
-    logData(req);
-    res.send(200, 'Save');
+    console.log('req.body ' + JSON.stringify(req.body));
+    // logData(req);
+    res.status(200).send('Save');
 };
 
 /*
@@ -97,6 +97,19 @@ exports.execute = function (req, res) {
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
             // TODO here to execute the logic
+
+            // Requestbin request test Debug
+            // var request = require('request');
+            // var url = 'http://requestbin.fullcontact.com/1hhmmpq1';
+            // request({
+            //     url: url,
+            //     method: "post",
+            //     json: decoded.inArguments[0]
+            // }, function (error, response, body) {
+            //     if (!error) {
+            //       console.log(body);
+            //     }
+            //   });
 
             logData(req);
             res.send(200, 'Execute');
@@ -127,4 +140,16 @@ exports.validate = function (req, res) {
     console.log('validate test ' +  + process.env.intercom-token);
     logData(req);
     res.send(200, 'Validate');
+};
+
+
+/*
+ * POST Handler for /stop/ route of Activity.
+ */
+exports.stop = function (req, res) {
+    // Data from the req and put it in an array accessible to the main app.
+    //console.log( req.body );
+    // console.log('validate test ' +  + process.env.intercom-token);
+    logData(req);
+    res.send(200, 'stop');
 };
