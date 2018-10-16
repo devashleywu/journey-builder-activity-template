@@ -17,7 +17,8 @@
 	"arguments": {
 		"execute": {
 			"inArguments": [{
-                "emailAddress": "{{InteractionDefaults.Email}}"
+				"emailAddress": "{{InteractionDefaults.Email}}",
+				"username":""
 			}],
 			"outArguments": [],
 			"url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/execute",

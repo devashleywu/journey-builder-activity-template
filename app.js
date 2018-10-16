@@ -15,7 +15,8 @@ var app = express();
 
 // Configure Express
 app.set('port', process.env.PORT || 3000);
-app.use(express.json());
+// Debug mode, pass clear json data.
+// app.use(express.json());
 app.use(bodyParser.raw({type: 'application/jwt'}));
 //app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -34,7 +35,7 @@ app.get('/', routes.index );
 app.post('/login', routes.login );
 app.post('/logout', routes.logout );
 
-// Custom Hello World Activity Routes
+// Custom Activity Routes
 app.post('/journeybuilder/save/', activity.save );
 app.post('/journeybuilder/validate/', activity.validate );
 app.post('/journeybuilder/publish/', activity.publish );

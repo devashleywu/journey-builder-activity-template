@@ -70,12 +70,14 @@ define([
     }
 
     function save() {
-        var postcardURLValue = $('#postcard-url').val();
-        var postcardTextValue = $('#postcard-text').val();
+        // var postcardURLValue = $('#postcard-url').val();
+        // var postcardTextValue = $('#postcard-text').val();
+        var username = $('#username').val();
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "emailAddress": "{{Contact.Attribute.Test_DE_Ashley.EmailAddress}}"
+            // "emailAddress": "{{Contact.Attribute.Test_DE_Ashley.EmailAddress}}"
+            "username": username
         }];
         
         payload['metaData'].isConfigured = true;

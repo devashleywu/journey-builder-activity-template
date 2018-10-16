@@ -1,6 +1,6 @@
 var Intercom = require('intercom-client');
 
-var client = new Intercom.Client({ token: process.env.intercom-token });
+var client = new Intercom.Client({ token: process.env.intercomToken });
 // First let's send an email with some example HTML format in the body
 
 // var message = {

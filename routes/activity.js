@@ -41,7 +41,7 @@ function logData(req) {
     console.log("cookies: " + req.cookies);
     console.log("ip: " + req.ip);
     console.log("path: " + req.path);
-    console.log("host: " + req.host);
+    console.log("host: " + req.hostname);
     console.log("fresh: " + req.fresh);
     console.log("stale: " + req.stale);
     console.log("protocol: " + req.protocol);
@@ -57,7 +57,7 @@ exports.edit = function (req, res) {
     //console.log( req.body );
     console.log('in edit step');
     logData(req);
-    res.send(200, 'Edit');
+    res.status(200).send('Edit')
 };
 
 /*
@@ -110,8 +110,13 @@ exports.execute = function (req, res) {
             //     }
             //   });
 
+            // var Intercom = require('intercom-client');
+            // var client = new Intercom.Client({ token: process.env.intercomToken });
+            
+            var username = decodedArgs.username;
+            console.log(username);
             logData(req);
-            res.send(200, 'Execute');
+            res.status(200).send('Execute');
         } else {
             console.error('inArguments invalid.');
             return res.status(400).end();
@@ -127,7 +132,7 @@ exports.publish = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     logData(req);
-    res.send(200, 'Publish');
+    res.status(200).send('Publish')
 };
 
 /*
@@ -137,7 +142,7 @@ exports.validate = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     logData(req);
-    res.send(200, 'Validate');
+    res.status(200).send('Validate')
 };
 
 
@@ -146,7 +151,6 @@ exports.validate = function (req, res) {
  */
 exports.stop = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
-    //console.log( req.body );
     logData(req);
-    res.send(200, 'stop');
+    res.status(200).send('Stop')
 };
