@@ -84,6 +84,7 @@ define([
 
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
+        console.log('username ' + username);
         
         connection.trigger('updateActivity', payload);
     }
