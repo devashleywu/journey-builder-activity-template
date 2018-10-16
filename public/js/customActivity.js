@@ -28,7 +28,7 @@ define([
 
     function initialize(data) {
         console.log('data ' + data);
-        var emailAddress = '';
+        var emailAddress;
 
         if (data) {
             payload = data;
