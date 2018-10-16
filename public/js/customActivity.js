@@ -28,7 +28,7 @@ define([
 
     function initialize(data) {
         console.log('data ' + data);
-        var emailAddress;
+        var username;
 
         if (data) {
             payload = data;
@@ -43,13 +43,26 @@ define([
   
         var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
 
-        $.each(inArguments, function(index, inArgument) {
-            $.each(inArgument, function(key, val) {
-                if (key === 'emailAddress') {
-                    emailAddress = val;
-                }
-            });
-        });
+        // $.each(inArguments, function(index, inArgument) {
+        //     $.each(inArgument, function(key, val) {
+        //         if (key === 'username') {
+        //             username = val;
+        //         }
+        //     });
+        // });
+
+
+        // If there is no message selected, disable the next button
+
+        // if (!username) {
+        //     showStep(null, 1);
+        //     connection.trigger('updateButton', { button: 'next', enabled: false });
+        //     // If there is a message, skip to the summary step
+        // } else {
+        //     $('#select1').find('option[value='+ message +']').attr('selected', 'selected');
+        //     $('#message').html(message);
+        //     showStep(null, 3);
+        // }
 
         console.log('hasInArguments ' + hasInArguments);
         console.log('inArguments' + inArguments);
@@ -76,31 +89,29 @@ define([
         // var postcardTextValue = $('#postcard-text').val();
         var username = $('#username').val();
 
-        $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
-            $.each(inArgument, function(key, val) {
-                if (key === 'emailAddress') {
-                    emailAddress = val;
-                }
-                if (key === 'tokens') {
-                    tokens = authTokens;
-                }
-                if (key === 'username') {
-                    username = username;
-                } 
-            });
-        });
+        // $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
+        //     $.each(inArgument, function(key, val) {
+        //         if (key === 'tokens') {
+        //             tokens = authTokens;
+        //         }
+        //         if (key === 'username') {
+        //             username = username;
+        //         } 
+        //     });
+        // });
 
-        // payload['arguments'].execute.inArguments = [{
-        //     "tokens": authTokens,
-        //     "emailAddress" : emailAddress,
-        //     "username": username
-        // }];
+        payload['arguments'].execute.inArguments = [{
+            "tokens": authTokens,
+            "emailAddress" : emailAddress,
+            "username": username
+        }];
         
         payload['metaData'].isConfigured = true;
 
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
         console.log('username ' + username);
+        console.log('emailAddress ' + emailAddress);
         
         connection.trigger('updateActivity', payload);
     }
