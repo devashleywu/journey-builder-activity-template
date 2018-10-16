@@ -39,19 +39,20 @@ define([
             payload['arguments'].execute.inArguments &&
             payload['arguments'].execute.inArguments.length > 0
         );
-
+  
         var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
+
+        $.each(inArguments, function(index, inArgument) {
+            $.each(inArgument, function(key, val) {
+                if (key === 'emailAddress') {
+                    emailAddress = val;
+                }
+            });
+        });
 
         console.log('hasInArguments ' + hasInArguments);
         console.log('inArguments' + inArguments);
         console.log('inArguments details ' + payload['arguments'].execute.inArguments[0].emailAddress);
-
-        $.each(inArguments, function (index, inArgument) {
-            $.each(inArgument, function (key, val) {
-                
-              
-            });
-        });
 
         connection.trigger('updateButton', {
             button: 'next',
@@ -74,11 +75,25 @@ define([
         // var postcardTextValue = $('#postcard-text').val();
         var username = $('#username').val();
 
-        payload['arguments'].execute.inArguments = [{
-            "tokens": authTokens,
-            // "emailAddress": "{{Contact.Attribute.Test_DE_Ashley.EmailAddress}}"
-            "username": username
-        }];
+        $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
+            $.each(inArgument, function(key, val) {
+                if (key === 'emailAddress') {
+                    emailAddress = val;
+                }
+                if (key === 'tokens') {
+                    tokens = authTokens;
+                }
+                if (key === 'username') {
+                    username = username;
+                } 
+            });
+        });
+
+        // payload['arguments'].execute.inArguments = [{
+        //     "tokens": authTokens,
+        //     "emailAddress" : emailAddress,
+        //     "username": username
+        // }];
         
         payload['metaData'].isConfigured = true;
 

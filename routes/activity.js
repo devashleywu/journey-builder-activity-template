@@ -110,11 +110,23 @@ exports.execute = function (req, res) {
             //     }
             //   });
 
-            // var Intercom = require('intercom-client');
-            // var client = new Intercom.Client({ token: process.env.intercomToken });
+            var Intercom = require('intercom-client');
+            var client = new Intercom.Client({ token: process.env.intercomToken });
 
-            var username = JSON.stringify(decodedArgs);
-            console.log(username);
+            var username = JSON.stringify(decodedArgs).username;
+
+            client.users.create({
+                "user_id": "1234",
+                "name": username,
+                custom_attributes: {
+                  foo: 'test'
+                }
+              }, callback);
+
+            console.log('json in backend logs' + JSON.stringify(decodedArgs));
+            
+            console.log('username in backend logs' + username);
+
             logData(req);
             res.status(200).send('Execute');
         } else {
