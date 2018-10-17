@@ -102,7 +102,7 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "emailAddress" : emailAddress,
+            // "emailAddress" : emailAddress,
             "username": username
         }];
         
@@ -111,7 +111,7 @@ define([
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
         console.log('username ' + username);
-        console.log('emailAddress ' + emailAddress);
+        // console.log('emailAddress ' + emailAddress);
         
         connection.trigger('updateActivity', payload);
     }
