@@ -110,7 +110,7 @@ exports.execute = function (req, res) {
             //     }
             //   });
 
-            var Intercom = require('intercom-client');
+            // var Intercom = require('intercom-client');
             var client = new Intercom.Client({ token: process.env.intercomToken });
 
             var username = JSON.stringify(decodedArgs).username;
@@ -121,7 +121,12 @@ exports.execute = function (req, res) {
                 custom_attributes: {
                   foo: 'test'
                 }
-              }, callback);
+              }, function (err, d) {
+                // err is an error response object, or null
+                // d is a successful response object, or null
+                console.log('error ' + err);
+                console.log('d ' + d);
+              });
 
             console.log('json in backend logs' + JSON.stringify(decodedArgs));
             
