@@ -1,26 +1,28 @@
 {
   "name": "jb-activity-template",
   "version": "1.0.0",
-  "description": "Journey Builder Activity Template",
+  "description": "custom journey builder activity test",
   "engines": {
-    "node": "6.11.1"
+    "node": "10.12.0",
+    "yarn": "1.10.1"
   },
   "scripts": {
     "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/devsutd/journey-builder-activity-template.git"
-  },
-  "author": "Devs United",
+  "repository": "",
+  "author": "Ashley Wu",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "bower": "^1.8.0",
     "errorhandler": "^1.5.0",
     "express": "^4.16.3",
     "intercom-client": "^2.10.2",
+    "jquery": "3.3.1",
     "jsonwebtoken": "^8.0.1",
+    "passport-intercom": "0.0.4",
     "request": "^2.88.0",
     "require": "^2.4.20"
-  }
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "private": true
 }

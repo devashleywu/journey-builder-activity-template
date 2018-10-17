@@ -121,7 +121,7 @@ exports.execute = function (req, res) {
                 custom_attributes: {
                   foo: 'test'
                 }
-              }, function (err, d) {
+              }, (err, d) => {
                 // err is an error response object, or null
                 // d is a successful response object, or null
                 console.log('error ' + err);
@@ -149,7 +149,7 @@ exports.publish = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     logData(req);
-    res.status(200).send('Publish')
+    res.status(200).send('Publish');
 };
 
 /*
@@ -159,7 +159,7 @@ exports.validate = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     logData(req);
-    res.status(200).send('Validate')
+    res.status(200).send('Validate');
 };
 
 
@@ -169,5 +169,5 @@ exports.validate = function (req, res) {
 exports.stop = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     logData(req);
-    res.status(200).send('Stop')
+    res.status(200).send('Stop');
 };
