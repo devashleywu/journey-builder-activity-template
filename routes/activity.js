@@ -113,7 +113,7 @@ exports.execute = function (req, res) {
             // var Intercom = require('intercom-client');
             var client = new Intercom.Client({ token: process.env.intercomToken });
 
-            var username = JSON.stringify(decodedArgs).username;
+            var username = JSON.parse(decodedArgs).username;
 
             client.users.create({
                 "user_id": "1234",
@@ -128,7 +128,7 @@ exports.execute = function (req, res) {
                 console.log('d ' + d);
               });
 
-            console.log('json in backend logs' + JSON.stringify(decodedArgs));
+            console.log('json in backend logs' + JSON.parse(decodedArgs));
             
             console.log('username in backend logs' + username);
 
