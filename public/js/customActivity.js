@@ -125,11 +125,11 @@ define([
 		$('.step').hide();
 
 		switch (currentStep.key) {
-		case 'eventdefinitionkey':
+		case 'step1':
 			$('#step1').show();
 			$('#step1 input').focus();
 			break;
-		case 'idselection':
+		case 'step2':
 			$('#step2').show();
 			$('#step2 input').focus();
 			break;
@@ -153,7 +153,7 @@ define([
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
             // "emailAddress" : emailAddress,
-            "username": username
+            // "username": username
         }];
         
         payload['metaData'].isConfigured = true;
@@ -162,14 +162,13 @@ define([
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
         console.log('username ' + username);
-        // console.log('emailAddress ' + emailAddress);
         connection.trigger('updateActivity', payload);
     }
 
     connection.on('clickedNext', onClickedNext);
     connection.on('clickedBack', onClickedBack);
     connection.on('gotoStep', onGotoStep);
-    
+
 });
 
 
