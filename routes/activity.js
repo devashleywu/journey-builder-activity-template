@@ -108,7 +108,7 @@ exports.execute = function (req, res) {
             // var Intercom = require('intercom-client');
             var client = new Intercom.Client({ token: process.env.intercomToken });
 
-            var username = JSON.parse(decodedArgs).username;
+            var username = decodedArgs.username;
 
             client.users.create({
                 "user_id": "1234" + username,
