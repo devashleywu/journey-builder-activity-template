@@ -27,6 +27,7 @@ define([
     }
 
     function initialize(data) {
+        // DEBUG
         console.log('data ' + data);
         var username;
 
@@ -64,6 +65,7 @@ define([
         //     showStep(null, 3);
         // }
 
+        // DEBUG
         console.log('hasInArguments ' + hasInArguments);
         console.log('inArguments' + inArguments);
         console.log('inArguments details ' + payload['arguments'].execute.inArguments[0].emailAddress);
@@ -76,11 +78,13 @@ define([
     }
 
     function onGetTokens(tokens) {
+        // DEBUG
         console.log('token ' + tokens);
         authTokens = tokens;
     }
 
     function onGetEndpoints(endpoints) {
+        // DEBUG
         console.log('endpoints ' + endpoints);
     }
 
@@ -108,6 +112,7 @@ define([
         
         payload['metaData'].isConfigured = true;
 
+        // DEBUG
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
         console.log('username ' + username);

@@ -55,6 +55,8 @@ function logData(req) {
 exports.edit = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
+
+    // DEBUG
     console.log('in edit step');
     logData(req);
     res.status(200).send('Edit')
@@ -65,6 +67,7 @@ exports.edit = function (req, res) {
  */
 exports.save = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
+    // DEBUG
     console.log('req.body ' + JSON.stringify(req.body));
     // logData(req);
     res.status(200).send('Save');
@@ -74,6 +77,7 @@ exports.save = function (req, res) {
  * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
+    // DEBUG
     console.log('in execute step');
     console.log('test' + process.env.intercomToken);
 
@@ -108,11 +112,16 @@ exports.execute = function (req, res) {
             // var Intercom = require('intercom-client');
             var client = new Intercom.Client({ token: process.env.intercomToken });
 
-            var username = decodedArgs.username;
+            // DEBUG
+            console.log('decodedArgs ' + decodedArgs);
+            console.log('decodedinArguments ' + decoded.inArguments);
+            console.log('decodedArgsParse ' + JSON.parse(decodedArgs));
+            // var username = decodedArgs.username;
 
             client.users.create({
                 "user_id": "1234" + username,
-                "name": username,
+                // "name": username,
+                "name": 'test',
                 custom_attributes: {
                   foo: 'test'
                 }
@@ -123,8 +132,8 @@ exports.execute = function (req, res) {
                 console.log('d ' + d);
               });
 
-            console.log('json in backend logs' + JSON.parse(decodedArgs));
-            
+            // DEBUG  
+            console.log('json in backend logs' + JSON.parse(decodedArgs));            
             console.log('username in backend logs' + username);
 
             logData(req);

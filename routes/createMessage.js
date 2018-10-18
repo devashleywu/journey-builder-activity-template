@@ -21,6 +21,7 @@ var client = new Intercom.Client({ token: process.env.intercomToken });
 function adminEmailMsg() {
     console.log("Send an admin initiated email message to a lead")
     client.messages.create(message, function (rsp){
+        // DEBUG
         console.log(rsp.body)
     });
 }
