@@ -9,9 +9,10 @@
 	"type": "REST",
 	"lang": {
 		"en-US": {
-			"name": "Template",
-			"description": "A Template for a custom Journey Builder activity",
-			"step1Label": "Configure Activity"
+			"name": "Intercom Message Activity",
+			"description": "A custom Journey Builder activity to trigger third party API",
+			"step1Label": "Configure Activity",
+			"step2Label": "Step 2"
 		}
 	},
 	"arguments": {
@@ -53,16 +54,16 @@
 		}
 	},
 	"wizardSteps": [{
-		"label": "Configure Activity",
+		"label": "Create Message",
 		"key": "step1"
 	},
 	{
-		"label": "Step 2",
+		"label": "Define Expiry Date",
 		"key": "step2"
 	}],
 	"userInterfaces": {
 		"configModal": {
-			"height": 400,
+			"height": 600,
 			"width": 1000,
 			"fullscreen": false
 		},

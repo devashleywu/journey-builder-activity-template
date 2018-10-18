@@ -54,36 +54,43 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h1>welcome to your activity!</h1>
+                        <h1>Welcome to your activity!</h1>
                     </div>
                 </div>
                 <div class="row" id="messageRow">
                     <div class="col">
-                        <div class="" >
+                        <div class="">
+                            <p class="inputLabel">Create Message</p>
                             <label for="message">Message:</label>
-                            <input type="textarea" class="form-control" id="message" placeholder="Type your message here">
+                            <textarea class="form-control" id="message" placeholder="Type your message here" row="3"></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="row" id="dateRow">
+                <!-- <div class="row" id="dateRow">
                     <div class="col">
                         <div class="input-group date" >
+                            <p class="inputLabel">Define Expiry Date</p>
                             <label for="datepicker">Please choose the message expiry date here:</label>
                             <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- step 2 -->
-        <!-- <div id="step2" class="step">
-            <div class="container">
-                <div class="input-group date">
-                    <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
+        <div id="step2" class="step">
+            <div class="row" id="dateRow">
+                <div class="col">
+                    <div class="input-group date">
+                        <p class="inputLabel">Define Expiry Date</p>
+                        <label for="datepicker">Please choose the message expiry date here:</label>
+                        <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </body>
 

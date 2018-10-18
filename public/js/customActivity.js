@@ -9,13 +9,23 @@ define([
     var authTokens = {};
     var payload = {};
 
+    var steps = [{
+		"label": "Create Message",
+		"key": "step1"
+	},
+	{
+		"label": "Define Expiry Date",
+		"key": "step2"
+	}];
+	var currentStep = steps[0].key;
+
     $(window).ready(onRender);
 
     connection.on('initActivity', initialize);
     connection.on('requestedTokens', onGetTokens);
     connection.on('requestedEndpoints', onGetEndpoints);
 
-    connection.on('clickedNext', save);
+    // connection.on('clickedNext', save);
    
     function onRender() {
         // JB will respond the first time 'ready' is called with 'initActivity'
@@ -88,6 +98,44 @@ define([
         console.log('endpoints ' + endpoints);
     }
 
+    function onClickedNext () {
+		if (currentStep.key === 'step1') {
+			save();
+		} else {
+			connection.trigger('nextStep');
+		}
+	}
+
+	function onClickedBack () {
+		connection.trigger('prevStep');
+	}
+
+	function onGotoStep (step) {
+		showStep(step);
+		connection.trigger('ready');
+	}
+
+	function showStep (step, stepIndex) {
+		if (stepIndex && !step) {
+			step = steps[stepIndex - 1];
+		}
+
+		currentStep = step;
+
+		$('.step').hide();
+
+		switch (currentStep.key) {
+		case 'eventdefinitionkey':
+			$('#step1').show();
+			$('#step1 input').focus();
+			break;
+		case 'idselection':
+			$('#step2').show();
+			$('#step2 input').focus();
+			break;
+		}
+	}
+
     function save() {
         var message = $('#message').val();
         var expiry = $('#datepicker').val();
@@ -115,9 +163,13 @@ define([
         console.log('payload metadata ' + payload['metaData'].isConfigured);
         console.log('username ' + username);
         // console.log('emailAddress ' + emailAddress);
-        
         connection.trigger('updateActivity', payload);
     }
+
+    connection.on('clickedNext', onClickedNext);
+    connection.on('clickedBack', onClickedBack);
+    connection.on('gotoStep', onGotoStep);
+    
 });
 
 
