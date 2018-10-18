@@ -116,11 +116,11 @@ exports.execute = function (req, res) {
             console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
             console.log('decodedinArguments 2 ' + decoded.inArguments);
             console.log('decodedArgsParse 3 ' + decodedArgs.username);
-            // var username = decodedArgs.username;
+            var username = decodedArgs.username;
 
             client.users.create({
                 "user_id": "1234" + username,
-                // "name": username,
+                "name": username,
                 "name": 'test',
                 custom_attributes: {
                   foo: 'test'
@@ -132,8 +132,7 @@ exports.execute = function (req, res) {
                 console.log('d ' + d);
               });
 
-            // DEBUG  
-            console.log('json in backend logs' + JSON.parse(decodedArgs));            
+            // DEBUG      
             console.log('username in backend logs' + username);
 
             logData(req);
