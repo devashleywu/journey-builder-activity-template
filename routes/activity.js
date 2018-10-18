@@ -94,6 +94,8 @@ exports.execute = function (req, res) {
             
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
+            // DEBUG
+            console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
             // TODO here to execute the logic
 
             // Requestbin request test Debug
@@ -109,13 +111,7 @@ exports.execute = function (req, res) {
             //     }
             //   });
 
-            // var Intercom = require('intercom-client');
-            var client = new Intercom.Client({ token: process.env.intercomToken });
-
-            // DEBUG
-            console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
-            console.log('decodedinArguments 2 ' + decoded.inArguments);
-            console.log('decodedArgsParse 3 ' + decodedArgs.username);
+            var client = new Intercom.Client({ token: process.env.intercomToken });                            
             var username = decodedArgs.username;
 
             client.users.create({
@@ -131,9 +127,6 @@ exports.execute = function (req, res) {
                 console.log('error ' + err);
                 console.log('d ' + d);
               });
-
-            // DEBUG      
-            console.log('username in backend logs' + username);
 
             logData(req);
             res.status(200).send('Execute');

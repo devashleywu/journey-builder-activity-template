@@ -89,10 +89,8 @@ define([
     }
 
     function save() {
-        // var postcardURLValue = $('#postcard-url').val();
-        // var postcardTextValue = $('#postcard-text').val();
-        var username = $('#username').val();
-
+        var message = $('#message').val();
+        var expiry = $('#datepicker').val();
         // $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
         //     $.each(inArgument, function(key, val) {
         //         if (key === 'tokens') {

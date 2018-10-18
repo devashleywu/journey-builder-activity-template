@@ -10,3 +10,15 @@ body {
 #step1 {
     display: block;
 }
+
+/* label{margin-left: 20px;} */
+/* #datepicker{width:180px; margin: 0 20px 20px 20px;} */
+#datepicker > span:hover{cursor: pointer;}
+
+#dateRow{
+    margin-top: 15px;
+}
+
+#datepicker {
+    width: 100%;
+}
