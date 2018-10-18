@@ -76,11 +76,6 @@ exports.save = function (req, res) {
 exports.execute = function (req, res) {
     console.log('in execute step');
     console.log('test' + process.env.intercomToken);
-    
-    var createUser = {
-        "user_id": "testuser1",
-        "name": "Test user"
-    }
 
     // example on how to decode JWT
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
@@ -116,7 +111,7 @@ exports.execute = function (req, res) {
             var username = JSON.parse(decodedArgs).username;
 
             client.users.create({
-                "user_id": "1234",
+                "user_id": "1234" + username,
                 "name": username,
                 custom_attributes: {
                   foo: 'test'
