@@ -130,7 +130,7 @@ define([
 			break;
 		case 'step2':
 			$('#step2').show();
-			$('#step2 input').focus();
+			// $('#step2 input').focus();
 			break;
 		}
 	}
