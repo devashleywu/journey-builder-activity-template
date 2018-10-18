@@ -39,7 +39,6 @@ define([
     function initialize(data) {
         // DEBUG
         console.log('data ' + data);
-        var username;
 
         if (data) {
             payload = data;
@@ -99,7 +98,7 @@ define([
     }
 
     function onClickedNext () {
-		if (currentStep.key === 'step1') {
+		if (currentStep.key === 'step2') {
 			save();
 		} else {
 			connection.trigger('nextStep');
@@ -152,6 +151,7 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
+            "message": message
             // "emailAddress" : emailAddress,
             // "username": username
         }];
@@ -161,7 +161,7 @@ define([
         // DEBUG
         console.log('payload ' + payload);
         console.log('payload metadata ' + payload['metaData'].isConfigured);
-        console.log('username ' + username);
+        // console.log('username ' + username);
         connection.trigger('updateActivity', payload);
     }
 

@@ -112,21 +112,37 @@ exports.execute = function (req, res) {
             //   });
 
             var client = new Intercom.Client({ token: process.env.intercomToken });                            
-            var username = decodedArgs.username;
+            // var username = decodedArgs.username;
+            var message = decodedArgs.message;
+            // Intercom API create new user
+            // client.users.create({
+            //     "user_id": "1234" + username,
+            //     "name": username,
+            //     "name": 'test',
+            //     custom_attributes: {
+            //       foo: 'test'
+            //     }
+            //   }, (err, d) => {
+            //     // err is an error response object, or null
+            //     // d is a successful response object, or null
+            //     console.log('error ' + err);
+            //     console.log('d ' + d);
+            //   });
 
-            client.users.create({
-                "user_id": "1234" + username,
-                "name": username,
-                "name": 'test',
-                custom_attributes: {
-                  foo: 'test'
-                }
-              }, (err, d) => {
-                // err is an error response object, or null
-                // d is a successful response object, or null
-                console.log('error ' + err);
-                console.log('d ' + d);
-              });
+            // Intercom API create conversation
+            // client.users.create({
+            //     "user_id": "1234" + username,
+            //     "name": username,
+            //     "name": 'test',
+            //     custom_attributes: {
+            //       foo: 'test'
+            //     }
+            //   }, (err, d) => {
+            //     // err is an error response object, or null
+            //     // d is a successful response object, or null
+            //     console.log('error ' + err);
+            //     console.log('d ' + d);
+            //   }); 
 
             logData(req);
             res.status(200).send('Execute');
