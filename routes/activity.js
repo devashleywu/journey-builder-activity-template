@@ -113,9 +113,9 @@ exports.execute = function (req, res) {
             var client = new Intercom.Client({ token: process.env.intercomToken });
 
             // DEBUG
-            console.log('decodedArgs ' + decodedArgs);
-            console.log('decodedinArguments ' + decoded.inArguments);
-            console.log('decodedArgsParse ' + JSON.parse(decodedArgs));
+            console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
+            console.log('decodedinArguments 2 ' + decoded.inArguments);
+            console.log('decodedArgsParse 3 ' + decodedArgs.username);
             // var username = decodedArgs.username;
 
             client.users.create({
