@@ -68,7 +68,7 @@ exports.edit = function (req, res) {
 exports.save = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     // DEBUG
-    console.log('req.body ' + JSON.stringify(req.body));
+    // console.log('req.body ' + JSON.stringify(req.body));
     // logData(req);
     res.status(200).send('Save');
 };
@@ -91,7 +91,7 @@ exports.execute = function (req, res) {
         }
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-            
+
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
             // DEBUG
@@ -111,9 +111,11 @@ exports.execute = function (req, res) {
             //     }
             //   });
 
-            var client = new Intercom.Client({ token: process.env.intercomToken });                            
+            var client = new Intercom.Client({
+                token: process.env.intercomToken
+            });
             // var username = decodedArgs.username;
-            var message = decodedArgs.message;
+            var messageContent = decodedArgs.message;
             // Intercom API create new user
             // client.users.create({
             //     "user_id": "1234" + username,
@@ -130,19 +132,30 @@ exports.execute = function (req, res) {
             //   });
 
             // Intercom API create conversation
-            // client.users.create({
-            //     "user_id": "1234" + username,
-            //     "name": username,
-            //     "name": 'test',
-            //     custom_attributes: {
-            //       foo: 'test'
+            // Admin initiated messages:
+            // Sending an email to a User
+            // var messagePayload = {
+            //     message_type: "inapp",
+            //     subject: "Test",
+            //     body: messageContent,
+            //     template: "plain",
+            //     from: {
+            //         type: "admin",
+            //         id: process.env.intercomTestAdminId 
+            //     },
+            //     to: {
+            //         type: "user",
+            //         id: process.env.intercomTestUserId
+            //        // email: ""
             //     }
-            //   }, (err, d) => {
+            // }
+
+            // client.messages.create(messagePayload, (err, d) => {
             //     // err is an error response object, or null
             //     // d is a successful response object, or null
             //     console.log('error ' + err);
             //     console.log('d ' + d);
-            //   }); 
+            // });
 
             logData(req);
             res.status(200).send('Execute');
@@ -169,9 +182,27 @@ exports.publish = function (req, res) {
  */
 exports.validate = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
-    //console.log( req.body );
+    // Decode JWT
+    JWT(req.body, process.env.jwtSecret, (err, decoded) => {
+        // verification error -> unauthorized request
+        if (err) {
+            console.error(err);
+            return res.status(401).end();
+        }
+
+        if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
+            // decoded in arguments
+            var decodedArgs = decoded.inArguments[0];
+            var messageContent = decodedArgs.message;
+            if(messageContent.length > 0) {
+                res.status(200).send('Validate');
+            }
+        }
+    });
+
+
     logData(req);
-    res.status(200).send('Validate');
+    
 };
 
 
