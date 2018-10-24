@@ -77,13 +77,13 @@ define([
         // DEBUG
         console.log('hasInArguments ' + hasInArguments);
         console.log('inArguments' + inArguments);
-        console.log('inArguments details ' + payload['arguments'].execute.inArguments[0].emailAddress);
+        // console.log('inArguments details ' + payload['arguments'].execute.inArguments[0].emailAddress);
 
-        connection.trigger('updateButton', {
-            button: 'next',
-            text: 'done',
-            visible: true
-        });
+        // connection.trigger('updateButton', {
+        //     button: 'next',
+        //     text: 'done',
+        //     visible: true
+        // });
     }
 
     function onGetTokens(tokens) {
