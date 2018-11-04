@@ -70,6 +70,43 @@ exports.save = function (req, res) {
     // DEBUG
     // console.log('req.body ' + JSON.stringify(req.body));
     // logData(req);
+
+    // Intercom API find user by user_id
+    var client = new Intercom.Client({
+        // token: process.env.intercomToken
+        token: "dG9rOjQ2MjkxMDFkXzg5MjlfNGZjNF9iN2M4XzdmYTZkMjM0ZWI3NDoxOjA="
+    });
+    // var userId = decodedArgs.userId;
+    var userId = "newtestuser2";
+    client.users.find({
+        user_id: userId
+    }, (err, d) => {
+        // err is an error response object, or null
+        // d is a successful response object, or null
+        console.log('error ' + JSON.stringify(err));
+        console.log('d ' + JSON.stringify(d));
+
+        if(err !== null) {
+            client.users.create({
+                user_id: userId
+              }, (err, d) => {
+                // err is an error response object, or null
+                // d is a successful response object, or null
+                console.log('error ' + err);
+                console.log('d ' + JSON.stringify(d));
+                if(err == null){
+                    console.log("user not exist, add tag after create user");
+                    client.tags.tag({ name: 'testtagname', users: [{ user_id: userId }] });
+                }
+              });
+        }
+        else{
+            // add tags
+            console.log("user exist, add tag directly");
+            client.tags.tag({ name: 'testtagname', users: [{ user_id: userId }] });
+        }
+    });
+
     res.status(200).send('Save');
 };
 
@@ -157,6 +194,17 @@ exports.execute = function (req, res) {
             //     console.log('d ' + d);
             // });
 
+            // Intercom API find user by user_id
+            var userId = decodedArgs.userId;
+            client.users.find({
+                user_id: userId
+            }, (err, d) => {
+                // err is an error response object, or null
+                // d is a successful response object, or null
+                console.log('error ' + err);
+                console.log('d ' + d);
+            });
+
             logData(req);
             res.status(200).send('Execute');
         } else {
@@ -194,7 +242,7 @@ exports.validate = function (req, res) {
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
             var messageContent = decodedArgs.message;
-            if(messageContent.length > 0) {
+            if (messageContent.length > 0) {
                 res.status(200).send('Validate');
             }
         }
@@ -202,7 +250,7 @@ exports.validate = function (req, res) {
 
 
     logData(req);
-    
+
 };
 
 
