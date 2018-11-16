@@ -53,6 +53,9 @@ function logData(req) {
  * POST Handler for / route of Activity (this is the edit route).
  */
 exports.edit = function (req, res) {
+    //
+    // TODO update saved value if saved value is not null.
+    // 
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
 
@@ -66,47 +69,21 @@ exports.edit = function (req, res) {
  * POST Handler for /save/ route of Activity.
  */
 exports.save = function (req, res) {
+    //
+    // TODO save the input. create a separate function 
+    //
+
     // Data from the req and put it in an array accessible to the main app.
     // DEBUG
     // console.log('req.body ' + JSON.stringify(req.body));
     // logData(req);
 
     // Intercom API find user by user_id
-    var client = new Intercom.Client({
-        // token: process.env.intercomToken
-        token: "dG9rOjQ2MjkxMDFkXzg5MjlfNGZjNF9iN2M4XzdmYTZkMjM0ZWI3NDoxOjA="
-    });
+    // var client = new Intercom.Client({
+    //     // token: process.env.intercomToken
+    //     token: "dG9rOjQ2MjkxMDFkXzg5MjlfNGZjNF9iN2M4XzdmYTZkMjM0ZWI3NDoxOjA="
+    // });
     // var userId = decodedArgs.userId;
-    var userId = "newtestuser2";
-    client.users.find({
-        user_id: userId
-    }, (err, d) => {
-        // err is an error response object, or null
-        // d is a successful response object, or null
-        console.log('error ' + JSON.stringify(err));
-        console.log('d ' + JSON.stringify(d));
-
-        if(err !== null) {
-            client.users.create({
-                user_id: userId
-              }, (err, d) => {
-                // err is an error response object, or null
-                // d is a successful response object, or null
-                console.log('error ' + err);
-                console.log('d ' + JSON.stringify(d));
-                if(err == null){
-                    console.log("user not exist, add tag after create user");
-                    client.tags.tag({ name: 'testtagname', users: [{ user_id: userId }] });
-                }
-              });
-        }
-        else{
-            // add tags
-            console.log("user exist, add tag directly");
-            client.tags.tag({ name: 'testtagname', users: [{ user_id: userId }] });
-        }
-    });
-
     res.status(200).send('Save');
 };
 
@@ -114,6 +91,9 @@ exports.save = function (req, res) {
  * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
+    //
+    // TODO handle multiple inputs
+    //
     // DEBUG
     console.log('in execute step');
     console.log('test' + process.env.intercomToken);
@@ -132,7 +112,7 @@ exports.execute = function (req, res) {
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
             // DEBUG
-            console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
+            // console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
             // TODO here to execute the logic
 
             // Requestbin request test Debug
@@ -151,22 +131,41 @@ exports.execute = function (req, res) {
             var client = new Intercom.Client({
                 token: process.env.intercomToken
             });
-            // var username = decodedArgs.username;
-            var messageContent = decodedArgs.message;
+            //
+            // TODO get user id from UI.
+            //
+            // var userid = decodedArgs.userid;
+            var tagname = decodedArgs.messageTag;
             // Intercom API create new user
-            // client.users.create({
-            //     "user_id": "1234" + username,
-            //     "name": username,
-            //     "name": 'test',
-            //     custom_attributes: {
-            //       foo: 'test'
-            //     }
-            //   }, (err, d) => {
-            //     // err is an error response object, or null
-            //     // d is a successful response object, or null
-            //     console.log('error ' + err);
-            //     console.log('d ' + d);
-            //   });
+            var userId = "newtestuser2";
+            client.users.find({
+                user_id: userId
+            }, (err, d) => {
+                // err is an error response object, or null
+                // d is a successful response object, or null
+                console.log('error ' + JSON.stringify(err));
+                console.log('d ' + JSON.stringify(d));
+        
+                if(err !== null) {
+                    client.users.create({   
+                        user_id: userId
+                      }, (err, d) => {
+                        // err is an error response object, or null
+                        // d is a successful response object, or null
+                        console.log('error ' + err);
+                        console.log('d ' + JSON.stringify(d));
+                        if(err == null){
+                            console.log("user not exist, add tag after create user");
+                            client.tags.tag({ name: tagname, users: [{ user_id: userId }] });
+                        }
+                      });
+                }
+                else{
+                    // add tags
+                    console.log("user exist, add tag directly");
+                    client.tags.tag({ name: tagname, users: [{ user_id: userId }] });
+                }
+            });
 
             // Intercom API create conversation
             // Admin initiated messages:
@@ -194,17 +193,6 @@ exports.execute = function (req, res) {
             //     console.log('d ' + d);
             // });
 
-            // Intercom API find user by user_id
-            var userId = decodedArgs.userId;
-            client.users.find({
-                user_id: userId
-            }, (err, d) => {
-                // err is an error response object, or null
-                // d is a successful response object, or null
-                console.log('error ' + err);
-                console.log('d ' + d);
-            });
-
             logData(req);
             res.status(200).send('Execute');
         } else {
@@ -229,6 +217,9 @@ exports.publish = function (req, res) {
  * POST Handler for /validate/ route of Activity.
  */
 exports.validate = function (req, res) {
+    //
+    // TODO check tagname input is not empty
+    // 
     // Data from the req and put it in an array accessible to the main app.
     // Decode JWT
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
@@ -262,3 +253,5 @@ exports.stop = function (req, res) {
     logData(req);
     res.status(200).send('Stop');
 };
+
+

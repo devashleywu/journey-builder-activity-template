@@ -136,7 +136,7 @@ define([
 	}
 
     function save() {
-        var message = $('#message').val();
+        var message = $('#messageTag').val();
         var expiry = $('#datepicker').val();
         // $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
         //     $.each(inArgument, function(key, val) {
@@ -151,7 +151,7 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "message": message
+            "messageTag": messageTag
             // "emailAddress" : emailAddress,
             // "username": username
         }];
