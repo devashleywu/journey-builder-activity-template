@@ -137,7 +137,8 @@ define([
 
     function save() {
         var messageTag = $('#messageTag').val();
-        var expiry = $('#datepicker').val();
+        // var expiry = $('#datepicker').val();
+        var firstname = '';
         // $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
         //     $.each(inArgument, function(key, val) {
         //         if (key === 'tokens') {
@@ -153,7 +154,7 @@ define([
             "tokens": authTokens,
             "messageTag": messageTag,
             "emailAddress": "{{InteractionDefaults.Email}}",
-            "firstname": "{{InteractionDefaults.First_Name}}"
+            "firstname": firstname
             // "firstnametest2": "{{InteractionDefaults.First_Name}}",
             // "username": username
         }];
