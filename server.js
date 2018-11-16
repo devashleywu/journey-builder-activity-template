@@ -14,24 +14,24 @@ var Intercom = require('intercom-client');
 var app = express();
 
 // Add watcher
-// var chokidar = require('chokidar')
-// var watcher = chokidar.watch('./..')
+var chokidar = require('chokidar')
+var watcher = chokidar.watch('./..')
 
-// watcher.on('ready', function() {
-//   watcher.on('all', function() {
-//     console.log("Clearing /app/ module cache from server")
-//     Object.keys(require.cache).forEach(function(id) {
-//       // if (/[\/\\]app[\/\\]/.test(id)) delete require.cache[id]
-//     })
-//   })
-// })
+watcher.on('ready', function() {
+  watcher.on('all', function() {
+    console.log("Clearing /app/ module cache from server")
+    Object.keys(require.cache).forEach(function(id) {
+      // if (/[\/\\]app[\/\\]/.test(id)) delete require.cache[id]
+    })
+  })
+})
 
 // Configure Express
 app.set('port', process.env.PORT || 3000);
 // Debug mode, pass clear json data.
-app.use(express.json());
+// app.use(express.json());
 app.use(bodyParser.raw({type: 'application/jwt'}));
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(express.methodOverride());
 // app.use(express.favicon());
