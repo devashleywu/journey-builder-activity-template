@@ -29,12 +29,12 @@ watcher.on('ready', function() {
 // Configure Express
 app.set('port', process.env.PORT || 3000);
 // Debug mode, pass clear json data.
-// app.use(express.json());
+app.use(express.json());
 app.use(bodyParser.raw({type: 'application/jwt'}));
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use(express.methodOverride());
-//app.use(express.favicon());
+app.use(express.methodOverride());
+app.use(express.favicon());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
