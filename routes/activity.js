@@ -233,8 +233,8 @@ exports.validate = function (req, res) {
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
-            var messageContent = decodedArgs.message;
-            if (messageContent.length > 0) {
+            var messageTag = decodedArgs.messageTag;
+            if (messageTag.length > 0) {
                 res.status(200).send('Validate');
             }
         }
