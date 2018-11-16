@@ -135,8 +135,9 @@ exports.execute = function (req, res) {
             // TODO get user id from UI.
             //
             // var userid = decodedArgs.userid;
-            var tagname = decodedArgs.messageTag;
+            var messageTag = decodedArgs.messageTag;
             var email = decodedArgs.emailAddress;
+            var firstname = decodedArgs.firstname;
             // Intercom API create new user
             var userId = "newtestuser2";
             client.users.find({
@@ -156,15 +157,15 @@ exports.execute = function (req, res) {
                         console.log('error ' + err);
                         console.log('d ' + JSON.stringify(d));
                         if(err == null){
-                            console.log("user not exist, add tag after create user");
-                            client.tags.tag({ name: tagname + email, users: [{ user_id: userId }] });
+                            console.log("user not exist, add tag after create user" + firstname);
+                            client.tags.tag({ name: messageTag, users: [{ user_id: userId }] });
                         }
                       });
                 }
                 else{
                     // add tags
-                    console.log("user exist, add tag directly");
-                    client.tags.tag({ name: tagname + email, users: [{ user_id: userId }] });
+                    console.log("user exist, add tag directly" + firstname);
+                    client.tags.tag({ name: messageTag, users: [{ user_id: userId }] });
                 }
             });
 

@@ -153,7 +153,9 @@ define([
             "tokens": authTokens,
             "messageTag": messageTag,
             // "emailAddress" : emailAddress,
-            "emailAddress": "{{InteractionDefaults.Email}}"
+            "emailAddress": "{{InteractionDefaults.Email}}",
+            "firstname": "{{InteractionDefaults.First_Name}}"
+            // "firstnametest2": "{{InteractionDefaults.First_Name}}",
             // "username": username
         }];
         
