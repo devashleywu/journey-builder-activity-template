@@ -151,8 +151,9 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "messageTag": messageTag
+            "messageTag": messageTag,
             // "emailAddress" : emailAddress,
+            "emailAddress": "{{InteractionDefaults.Email}}"
             // "username": username
         }];
         
