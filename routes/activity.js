@@ -157,14 +157,14 @@ exports.execute = function (req, res) {
                         console.log('d ' + JSON.stringify(d));
                         if(err == null){
                             console.log("user not exist, add tag after create user");
-                            client.tags.tag({ name: tagname + emailAddress, users: [{ user_id: userId }] });
+                            client.tags.tag({ name: tagname + email, users: [{ user_id: userId }] });
                         }
                       });
                 }
                 else{
                     // add tags
                     console.log("user exist, add tag directly");
-                    client.tags.tag({ name: tagname + emailAddress, users: [{ user_id: userId }] });
+                    client.tags.tag({ name: tagname + email, users: [{ user_id: userId }] });
                 }
             });
 
