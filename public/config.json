@@ -63,15 +63,9 @@
 	}],
 	"userInterfaces": {
 		"configModal": {
-			"height": 600,
-			"width": 1000,
-			"fullscreen": false
-		},
-		"runningModal": {
-			"url": "runningModal.html"
-		},
-		"runningHover": {
-			"url": "runningHover.html"
+			"height": 200,
+			"width": 300,
+			"fullscreen": true
 		}
 	},
 	"schema": {
