@@ -53,9 +53,6 @@ function logData(req) {
  * POST Handler for / route of Activity (this is the edit route).
  */
 exports.edit = function (req, res) {
-    //
-    // TODO update saved value if saved value is not null.
-    // 
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
 
@@ -69,21 +66,7 @@ exports.edit = function (req, res) {
  * POST Handler for /save/ route of Activity.
  */
 exports.save = function (req, res) {
-    //
-    // TODO save the input. create a separate function 
-    //
 
-    // Data from the req and put it in an array accessible to the main app.
-    // DEBUG
-    // console.log('req.body ' + JSON.stringify(req.body));
-    // logData(req);
-
-    // Intercom API find user by user_id
-    // var client = new Intercom.Client({
-    //     // token: process.env.intercomToken
-    //     token: "dG9rOjQ2MjkxMDFkXzg5MjlfNGZjNF9iN2M4XzdmYTZkMjM0ZWI3NDoxOjA="
-    // });
-    // var userId = decodedArgs.userId;
     res.status(200).send('Save');
 };
 
@@ -113,28 +96,11 @@ exports.execute = function (req, res) {
             var decodedArgs = decoded.inArguments[0];
             // DEBUG
             // console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
-            // TODO here to execute the logic
-
-            // Requestbin request test Debug
-            // var request = require('request');
-            // var url = 'http://requestbin.fullcontact.com/1hhmmpq1';
-            // request({
-            //     url: url,
-            //     method: "post",
-            //     json: decoded.inArguments[0]
-            // }, function (error, response, body) {
-            //     if (!error) {
-            //       console.log(body);
-            //     }
-            //   });
 
             var client = new Intercom.Client({
                 token: process.env.intercomToken
             });
             //
-            // TODO get user id from UI.
-            //
-            // var userid = decodedArgs.userid;
             var messageTag = decodedArgs.messageTag;
             var email = decodedArgs.emailAddress;
             var firstname = decodedArgs.firstname;
