@@ -48,7 +48,10 @@ define([
 			var description = $('#description').val();
 
 			$('#description_display').html(description);
-		});
+        });
+        
+        console.log('user tag render' + userTag);
+        console.log('desc tag render' + description);
 
     }
 
@@ -81,7 +84,10 @@ define([
             });
         });
 
-        // If there is no message selected, disable the next button
+        console.log('user tag init' + userTag);
+        console.log('desc tag init' + description);
+
+        // If there is no tag input, disable the next button
         if (!userTag) {
             showStep(null, 1);
             connection.trigger('updateButton', {
@@ -174,6 +180,8 @@ define([
         // console.log('payload ' + payload);
         // console.log('payload metadata ' + payload['metaData'].isConfigured);
         connection.trigger('updateActivity', payload);
+        console.log('user tag save' + userTag);
+        console.log('desc tag save' + description);
     }
 
     connection.on('clickedNext', onClickedNext);
