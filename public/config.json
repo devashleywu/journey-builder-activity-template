@@ -8,7 +8,7 @@
 	"type": "REST",
 	"lang": {
 		"en-US": {
-			"name": "Intercom Message Activity",
+			"name": "Intercom Tag User Activity",
 			"description": "A custom Journey Builder activity to integrate with Intercom Message Activity API",
 			"step1Label": "Define User Tag",
 			"step2Label": "Summary"
