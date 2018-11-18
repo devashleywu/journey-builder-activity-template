@@ -1,10 +1,10 @@
 'use strict';
-var util = require('util');
+// var  pool = require('../lib/db');
 
-// Deps
-const Path = require('path');
-const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
 var util = require('util');
+var Path = require('path');
+var JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
+var Client = require('pg');
 var http = require('https');
 var Intercom = require('intercom-client');
 
@@ -96,100 +96,64 @@ exports.execute = function (req, res) {
 
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
-            // DEBUG
-            // console.log('decodedArgs 1 ' + JSON.stringify(decodedArgs));
 
             var client = new Intercom.Client({
                 token: process.env.intercomToken
             });
-            //
+
             var userTag = decodedArgs.userTag;
-            console.log(userTag);
             var email = decodedArgs.emailAddress;
             var firstname = decodedArgs.firstname;
-            // Intercom API create new user
-            // var userId = "newtestuser2";
+
+            // Intercom API functions create new user
             var userId = email;
 
-            if (userId == 'ashley@bowerhousedigital.com.au') {
-                // test untag
-                var userUntag = 'testtag1231';
-                console.log('in untag user: ' + firstname + 'tag: ' + userId);
-
-                // untag function 
-                client.tags.tag({
-                    name: userUntag,
-                    users: [{
-                        user_id: userId,
-                        "untag" : true
-                    }]
-                });
-            } else {
-                // test add new tag
-                client.users.find({
-                    user_id: userId
-                }, (err, d) => {
-                    // err is an error response object, or null
-                    // d is a successful response object, or null
-                    console.log('error ' + JSON.stringify(err));
-                    console.log('d ' + JSON.stringify(d));
-
-                    if (err !== null) {
-                        client.users.create({
-                            user_id: userId
-                        }, (err, d) => {
-                            // err is an error response object, or null
-                            // d is a successful response object, or null
-                            console.log('error in user create' + err);
-                            console.log('d in user create' + JSON.stringify(d));
-                            if (err == null) {
-                                console.log("user not exist, add tag after create user" + userId);
-                                client.tags.tag({
-                                    name: userTag,
-                                    users: [{
-                                        user_id: userId
-                                    }]
-                                });
-                            }
-                        });
-                    } else {
-                        // add tags
-                        console.log("user exist, add tag directly" + userId);
-                        client.tags.tag({
-                            name: userTag,
-                            users: [{
-                                user_id: userId
-                            }]
-                        });
-                    }
-                });
-            }
-
-            // Intercom API create conversation
-            // Admin initiated messages:
-            // Sending an email to a User
-            // var messagePayload = {
-            //     message_type: "inapp",
-            //     subject: "Test",
-            //     body: messageContent,
-            //     template: "plain",
-            //     from: {
-            //         type: "admin",
-            //         id: process.env.intercomTestAdminId 
-            //     },
-            //     to: {
-            //         type: "user",
-            //         id: process.env.intercomTestUserId
-            //        // email: ""
-            //     }
-            // }
-
-            // client.messages.create(messagePayload, (err, d) => {
-            //     // err is an error response object, or null
-            //     // d is a successful response object, or null
-            //     console.log('error ' + err);
-            //     console.log('d ' + d);
+            // Untag function 
+            // client.tags.tag({
+            //     name: userTag,
+            //     users: [{
+            //         user_id: userId,
+            //         "untag" : true
+            //     }]
             // });
+            // Check user existence in intercom
+            client.users.find({
+                user_id: userId
+            }, (err, d) => {
+                // err is an error response object, or null
+                // d is a successful response object, or null
+                console.log('error ' + JSON.stringify(err));
+                console.log('d ' + JSON.stringify(d));
+
+                if (err !== null) {
+                    client.users.create({
+                        user_id: userId
+                    }, (err, d) => {
+                        console.log('error in user create' + err);
+                        console.log('d in user create' + JSON.stringify(d));
+                        if (err == null) {
+                            console.log("user not exist, add tag after create user" + userId);
+                            // Add tag
+                            client.tags.tag({
+                                name: userTag,
+                                users: [{
+                                    user_id: userId
+                                }]
+                            });
+                            insertIntoDb(user_id, userTag, 'true');
+                        }
+                    });
+                } else {
+                    // Add tag
+                    console.log("user exist, add tag directly" + userId);
+                    client.tags.tag({
+                        name: userTag,
+                        users: [{
+                            user_id: userId
+                        }]
+                    });
+                }
+            });
 
             logData(req);
             res.status(200).send('Execute');
@@ -215,9 +179,6 @@ exports.publish = function (req, res) {
  * POST Handler for /validate/ route of Activity.
  */
 exports.validate = function (req, res) {
-    //
-    // TODO check tagname input is not empty
-    // 
     // Data from the req and put it in an array accessible to the main app.
     // Decode JWT
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
@@ -226,20 +187,9 @@ exports.validate = function (req, res) {
             console.error(err);
             return res.status(401).end();
         }
-
-        // if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-        // decoded in arguments
-        // var decodedArgs = decoded.inArguments[0];
-        // var messageTag = decodedArgs.messageTag;
-        // if (messageTag.length > 0) {
         res.status(200).send('Validate');
-        // }
-        // }
     });
-
-
     logData(req);
-
 };
 
 
