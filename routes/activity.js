@@ -113,12 +113,15 @@ exports.execute = function (req, res) {
 
             if (userId == 'ashley@bowerhousedigital.com.au') {
                 // test untag
-                var userUntag = 'testtag1217';
-                console.log('in untag user: ' + firstname + 'tag: ' + userUntag);
+                var userUntag = 'testtag1231';
+                console.log('in untag user: ' + firstname + 'tag: ' + userId);
+
+                // untag function 
                 client.tags.tag({
                     name: userUntag,
                     users: [{
-                        user_id: userId
+                        user_id: userId,
+                        "untag" : true
                     }]
                 });
             } else {
@@ -140,7 +143,7 @@ exports.execute = function (req, res) {
                             console.log('error in user create' + err);
                             console.log('d in user create' + JSON.stringify(d));
                             if (err == null) {
-                                console.log("user not exist, add tag after create user" + firstname);
+                                console.log("user not exist, add tag after create user" + userId);
                                 client.tags.tag({
                                     name: userTag,
                                     users: [{
@@ -151,7 +154,7 @@ exports.execute = function (req, res) {
                         });
                     } else {
                         // add tags
-                        console.log("user exist, add tag directly" + firstname);
+                        console.log("user exist, add tag directly" + userId);
                         client.tags.tag({
                             name: userTag,
                             users: [{
