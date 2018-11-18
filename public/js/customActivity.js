@@ -23,17 +23,13 @@ define([
     $(window).ready(onRender);
 
     connection.on('initActivity', initialize);
-    // connection.on('requestedTokens', onGetTokens);
-    // connection.on('requestedEndpoints', onGetEndpoints);
-
     // connection.on('clickedNext', save);
 
     function onRender() {
         // JB will respond the first time 'ready' is called with 'initActivity'
         connection.trigger('ready');
         connection.trigger('updateSteps', steps);
-        // connection.trigger('requestTokens');
-        // connection.trigger('requestEndpoints');
+        
         $('#userTag').change(function() {
 			var userTag = $('#userTag').val();
 			connection.trigger('updateButton', {
@@ -49,10 +45,6 @@ define([
 
 			$('#description_display').html(description);
         });
-        
-        console.log('user tag render' + userTag);
-        console.log('desc tag render' + description);
-
     }
 
     function initialize(data) {
@@ -84,9 +76,6 @@ define([
             });
         });
 
-        console.log('user tag init' + userTag);
-        console.log('desc tag init' + description);
-
         // If there is no tag input, disable the next button
         if (!userTag) {
             showStep(null, 1);
@@ -114,17 +103,6 @@ define([
         //     visible: true
         // });
     }
-
-    // function onGetTokens(tokens) {
-    //     // DEBUG
-    //     console.log('token ' + tokens);
-    //     authTokens = tokens;
-    // }
-
-    // function onGetEndpoints(endpoints) {
-    //     // DEBUG
-    //     console.log('endpoints ' + endpoints);
-    // }
 
     function onClickedNext() {
         if (currentStep.key === 'step2') {
@@ -168,7 +146,6 @@ define([
         var description = $('#description').val();
 
         payload['arguments'].execute.inArguments = [{
-            // "tokens": authTokens,
             userTag: userTag,
             description: description,
             clientId: '{{Contact.Attribute.SFMC_Clients.ClientID}}',
@@ -181,8 +158,6 @@ define([
         // console.log('payload ' + payload);
         // console.log('payload metadata ' + payload['metaData'].isConfigured);
         connection.trigger('updateActivity', payload);
-        console.log('user tag save ' + userTag);
-        console.log('desc tag save' + description);
     }
 
     connection.on('clickedNext', onClickedNext);

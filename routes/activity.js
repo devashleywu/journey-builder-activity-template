@@ -74,13 +74,6 @@ exports.save = function (req, res) {
  * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
-    //
-    // TODO handle multiple inputs
-    //
-    // DEBUG
-    console.log('in execute step');
-    console.log('test' + process.env.intercomToken);
-
     // example on how to decode JWT
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
 
