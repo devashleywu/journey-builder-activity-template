@@ -1,5 +1,4 @@
 {
-	"key": "b705b1df-71ed-4851-858d-0db122e9ccc3",
 	"workflowApiVersion": "1.1",
 	"metaData": {
 		"icon": "images/icon.png",
@@ -10,9 +9,9 @@
 	"lang": {
 		"en-US": {
 			"name": "Intercom Message Activity",
-			"description": "A custom Journey Builder activity to trigger third party API",
-			"step1Label": "Configure Activity",
-			"step2Label": "Step 2"
+			"description": "A custom Journey Builder activity to integrate with Intercom Message Activity API",
+			"step1Label": "Define Message Tag",
+			"step2Label": "Summary"
 		}
 	},
 	"arguments": {
@@ -54,11 +53,11 @@
 		}
 	},
 	"wizardSteps": [{
-		"label": "Create Message",
+		"label": "Define Message Tag",
 		"key": "step1"
 	},
 	{
-		"label": "Define Expiry Date",
+		"label": "Summary",
 		"key": "step2"
 	}],
 	"userInterfaces": {
