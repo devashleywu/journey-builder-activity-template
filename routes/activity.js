@@ -1,10 +1,8 @@
 'use strict';
-// var  pool = require('../lib/db');
 
 var util = require('util');
 var Path = require('path');
 var JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
-var Client = require('pg');
 var http = require('https');
 var Intercom = require('intercom-client');
 
