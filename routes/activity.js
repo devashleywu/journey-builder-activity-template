@@ -103,7 +103,8 @@ exports.execute = function (req, res) {
                 token: process.env.intercomToken
             });
             //
-            var messageTag = decodedArgs.messageTag;
+            var userTag = decodedArgs.userTag;
+            console.log(userTag);
             var email = decodedArgs.emailAddress;
             var firstname = decodedArgs.firstname;
             // Intercom API create new user
@@ -123,18 +124,18 @@ exports.execute = function (req, res) {
                       }, (err, d) => {
                         // err is an error response object, or null
                         // d is a successful response object, or null
-                        console.log('error ' + err);
-                        console.log('d ' + JSON.stringify(d));
+                        console.log('error in user create' + err);
+                        console.log('d in user create' + JSON.stringify(d));
                         if(err == null){
                             console.log("user not exist, add tag after create user" + firstname);
-                            client.tags.tag({ name: messageTag, users: [{ user_id: userId }] });
+                            client.tags.tag({ name: userTag, users: [{ user_id: userId }] });
                         }
                       });
                 }
                 else{
                     // add tags
                     console.log("user exist, add tag directly" + firstname);
-                    client.tags.tag({ name: messageTag, users: [{ user_id: userId }] });
+                    client.tags.tag({ name: userTag, users: [{ user_id: userId }] });
                 }
             });
 
