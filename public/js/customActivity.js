@@ -97,6 +97,7 @@ define([
             // If there is a message, skip to the summary step
         } else {
             showStep(null, 2);
+            console.log(userTag);
 			$('#userTag').val(userTag);
             $('#description').val(description);
             $('#userTag_display').html(userTag);
@@ -164,14 +165,14 @@ define([
 
     function save() {
         var userTag = $('#userTag').val();
-        var userTag = $('#description').val();
+        var description = $('#description').val();
 
         payload['arguments'].execute.inArguments = [{
             // "tokens": authTokens,
-            "userTag": userTag,
-            "description": description,
-            "clientId": '{{Contact.Attribute.SFMC_Clients.ClientID}}',
-            "contactKey": '{{Contact.Key}}',
+            userTag: userTag,
+            description: description,
+            clientId: '{{Contact.Attribute.SFMC_Clients.ClientID}}',
+            contactKey: '{{Contact.Key}}',
         }];
 
         payload['metaData'].isConfigured = true;
@@ -180,7 +181,7 @@ define([
         // console.log('payload ' + payload);
         // console.log('payload metadata ' + payload['metaData'].isConfigured);
         connection.trigger('updateActivity', payload);
-        console.log('user tag save' + userTag);
+        console.log('user tag save ' + userTag);
         console.log('desc tag save' + description);
     }
 
