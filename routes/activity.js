@@ -66,7 +66,9 @@ exports.edit = function (req, res) {
  * POST Handler for /save/ route of Activity.
  */
 exports.save = function (req, res) {
-
+    
+    console.log('in save step');
+    logData(req);
     res.status(200).send('Save');
 };
 
