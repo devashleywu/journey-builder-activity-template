@@ -41,7 +41,7 @@ define([
 				enabled: Boolean(userTag)
 			});
 
-			$('#userTag').html(userTag);
+			$('#userTag_display').html(userTag);
 		});
 
 		$('#description').change(function() {
@@ -148,7 +148,7 @@ define([
         switch (currentStep.key) {
             case 'step1':
                 $('#step1').show();
-                $('#step1 input').focus();
+                $('#step1 input#userTag').focus();
                 break;
             case 'step2':
                 $('#step2').show();
