@@ -107,7 +107,8 @@ exports.execute = function (req, res) {
             var email = decodedArgs.emailAddress;
             var firstname = decodedArgs.firstname;
             // Intercom API create new user
-            var userId = "newtestuser2";
+            // var userId = "newtestuser2";
+            var userId = email;
             client.users.find({
                 user_id: userId
             }, (err, d) => {
