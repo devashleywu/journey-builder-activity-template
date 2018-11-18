@@ -66,7 +66,7 @@ exports.edit = function (req, res) {
  * POST Handler for /save/ route of Activity.
  */
 exports.save = function (req, res) {
-    
+
     console.log('in save step');
     logData(req);
     res.status(200).send('Save');
@@ -110,34 +110,57 @@ exports.execute = function (req, res) {
             // Intercom API create new user
             // var userId = "newtestuser2";
             var userId = email;
-            client.users.find({
-                user_id: userId
-            }, (err, d) => {
-                // err is an error response object, or null
-                // d is a successful response object, or null
-                console.log('error ' + JSON.stringify(err));
-                console.log('d ' + JSON.stringify(d));
-        
-                if(err !== null) {
-                    client.users.create({   
+
+            if (userId == 'ashley@bowerhousedigital.com.au') {
+                // test untag
+                var userUntag = 'testtag1217';
+                console.log('in untag user: ' + firstname + 'tag: ' + userUntag);
+                client.tags.tag({
+                    name: userUntag,
+                    users: [{
                         user_id: userId
-                      }, (err, d) => {
-                        // err is an error response object, or null
-                        // d is a successful response object, or null
-                        console.log('error in user create' + err);
-                        console.log('d in user create' + JSON.stringify(d));
-                        if(err == null){
-                            console.log("user not exist, add tag after create user" + firstname);
-                            client.tags.tag({ name: userTag, users: [{ user_id: userId }] });
-                        }
-                      });
-                }
-                else{
-                    // add tags
-                    console.log("user exist, add tag directly" + firstname);
-                    client.tags.tag({ name: userTag, users: [{ user_id: userId }] });
-                }
-            });
+                    }]
+                });
+            } else {
+                // test add new tag
+                client.users.find({
+                    user_id: userId
+                }, (err, d) => {
+                    // err is an error response object, or null
+                    // d is a successful response object, or null
+                    console.log('error ' + JSON.stringify(err));
+                    console.log('d ' + JSON.stringify(d));
+
+                    if (err !== null) {
+                        client.users.create({
+                            user_id: userId
+                        }, (err, d) => {
+                            // err is an error response object, or null
+                            // d is a successful response object, or null
+                            console.log('error in user create' + err);
+                            console.log('d in user create' + JSON.stringify(d));
+                            if (err == null) {
+                                console.log("user not exist, add tag after create user" + firstname);
+                                client.tags.tag({
+                                    name: userTag,
+                                    users: [{
+                                        user_id: userId
+                                    }]
+                                });
+                            }
+                        });
+                    } else {
+                        // add tags
+                        console.log("user exist, add tag directly" + firstname);
+                        client.tags.tag({
+                            name: userTag,
+                            users: [{
+                                user_id: userId
+                            }]
+                        });
+                    }
+                });
+            }
 
             // Intercom API create conversation
             // Admin initiated messages:
@@ -202,12 +225,12 @@ exports.validate = function (req, res) {
         }
 
         // if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-            // decoded in arguments
-            // var decodedArgs = decoded.inArguments[0];
-            // var messageTag = decodedArgs.messageTag;
-            // if (messageTag.length > 0) {
-                res.status(200).send('Validate');
-            // }
+        // decoded in arguments
+        // var decodedArgs = decoded.inArguments[0];
+        // var messageTag = decodedArgs.messageTag;
+        // if (messageTag.length > 0) {
+        res.status(200).send('Validate');
+        // }
         // }
     });
 
@@ -225,5 +248,3 @@ exports.stop = function (req, res) {
     logData(req);
     res.status(200).send('Stop');
 };
-
-
