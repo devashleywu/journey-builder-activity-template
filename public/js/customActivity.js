@@ -10,74 +10,96 @@ define([
     var payload = {};
 
     var steps = [{
-		"label": "Create Message",
-		"key": "step1"
-	},
-	{
-		"label": "Define Expiry Date",
-		"key": "step2"
-	}];
-	var currentStep = steps[0].key;
+            "label": "Define User Tag",
+            "key": "step1"
+        },
+        {
+            "label": "Summary",
+            "key": "step2"
+        }
+    ];
+    var currentStep = steps[0].key;
 
     $(window).ready(onRender);
 
     connection.on('initActivity', initialize);
-    connection.on('requestedTokens', onGetTokens);
-    connection.on('requestedEndpoints', onGetEndpoints);
+    // connection.on('requestedTokens', onGetTokens);
+    // connection.on('requestedEndpoints', onGetEndpoints);
 
     // connection.on('clickedNext', save);
-   
+
     function onRender() {
         // JB will respond the first time 'ready' is called with 'initActivity'
         connection.trigger('ready');
+        connection.trigger('updateSteps', steps);
+        // connection.trigger('requestTokens');
+        // connection.trigger('requestEndpoints');
+        $('#userTag').change(function() {
+			var userTag = $('#userTag').val();
+			connection.trigger('updateButton', {
+				button: 'next',
+				enabled: Boolean(userTag)
+			});
 
-        connection.trigger('requestTokens');
-        connection.trigger('requestEndpoints');
+			$('#userTag').html(userTag);
+		});
+
+		$('#description').change(function() {
+			var description = $('#description').val();
+
+			$('#description_display').html(description);
+		});
 
     }
 
     function initialize(data) {
+        var userTag, description;
         // DEBUG
         console.log('data ' + data);
 
         if (data) {
             payload = data;
         }
-        
+
         var hasInArguments = Boolean(
             payload['arguments'] &&
             payload['arguments'].execute &&
             payload['arguments'].execute.inArguments &&
             payload['arguments'].execute.inArguments.length > 0
         );
-  
+
         var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
 
-        // $.each(inArguments, function(index, inArgument) {
-        //     $.each(inArgument, function(key, val) {
-        //         if (key === 'username') {
-        //             username = val;
-        //         }
-        //     });
-        // });
-
+        $.each(inArguments, function (index, inArgument) {
+            $.each(inArgument, function (key, val) {
+                if (key === 'userTag') {
+                    userTag = val;
+                }
+                if (key === 'description') {
+                    description = val;
+                }
+            });
+        });
 
         // If there is no message selected, disable the next button
-
-        // if (!username) {
-        //     showStep(null, 1);
-        //     connection.trigger('updateButton', { button: 'next', enabled: false });
-        //     // If there is a message, skip to the summary step
-        // } else {
-        //     $('#select1').find('option[value='+ message +']').attr('selected', 'selected');
-        //     $('#message').html(message);
-        //     showStep(null, 3);
-        // }
+        if (!userTag) {
+            showStep(null, 1);
+            connection.trigger('updateButton', {
+                button: 'next',
+                enabled: false
+            });
+            // If there is a message, skip to the summary step
+        } else {
+            showStep(null, 2);
+			$('#userTag').val(userTag);
+            $('#description').val(description);
+            $('#userTag_display').html(userTag);
+			$('#description_display').html(description);
+        }
 
         // DEBUG
-        console.log('hasInArguments ' + hasInArguments);
-        console.log('inArguments' + inArguments);
-        // console.log('inArguments details ' + payload['arguments'].execute.inArguments[0].emailAddress);
+        // console.log('hasInArguments ' + hasInArguments);
+        // console.log('inArguments' + inArguments);
 
         // connection.trigger('updateButton', {
         //     button: 'next',
@@ -86,85 +108,71 @@ define([
         // });
     }
 
-    function onGetTokens(tokens) {
-        // DEBUG
-        console.log('token ' + tokens);
-        authTokens = tokens;
+    // function onGetTokens(tokens) {
+    //     // DEBUG
+    //     console.log('token ' + tokens);
+    //     authTokens = tokens;
+    // }
+
+    // function onGetEndpoints(endpoints) {
+    //     // DEBUG
+    //     console.log('endpoints ' + endpoints);
+    // }
+
+    function onClickedNext() {
+        if (currentStep.key === 'step2') {
+            save();
+        } else {
+            connection.trigger('nextStep');
+        }
     }
 
-    function onGetEndpoints(endpoints) {
-        // DEBUG
-        console.log('endpoints ' + endpoints);
+    function onClickedBack() {
+        connection.trigger('prevStep');
     }
 
-    function onClickedNext () {
-		if (currentStep.key === 'step2') {
-			save();
-		} else {
-			connection.trigger('nextStep');
-		}
-	}
+    function onGotoStep(step) {
+        showStep(step);
+        connection.trigger('ready');
+    }
 
-	function onClickedBack () {
-		connection.trigger('prevStep');
-	}
+    function showStep(step, stepIndex) {
+        if (stepIndex && !step) {
+            step = steps[stepIndex - 1];
+        }
 
-	function onGotoStep (step) {
-		showStep(step);
-		connection.trigger('ready');
-	}
+        currentStep = step;
 
-	function showStep (step, stepIndex) {
-		if (stepIndex && !step) {
-			step = steps[stepIndex - 1];
-		}
+        $('.step').hide();
 
-		currentStep = step;
-
-		$('.step').hide();
-
-		switch (currentStep.key) {
-		case 'step1':
-			$('#step1').show();
-			$('#step1 input').focus();
-			break;
-		case 'step2':
-			$('#step2').show();
-			// $('#step2 input').focus();
-			break;
-		}
-	}
+        switch (currentStep.key) {
+            case 'step1':
+                $('#step1').show();
+                $('#step1 input').focus();
+                break;
+            case 'step2':
+                $('#step2').show();
+                break;
+        }
+    }
 
     function save() {
         var userTag = $('#userTag').val();
-        // var expiry = $('#datepicker').val();
-        // var firstname = '';
-        // $.each(payload['arguments'].execute.inArguments, function(index, inArgument) {
-        //     $.each(inArgument, function(key, val) {
-        //         if (key === 'tokens') {
-        //             tokens = authTokens;
-        //         }
-        //         if (key === 'username') {
-        //             username = username;
-        //         } 
-        //     });
-        // });
+        var userTag = $('#description').val();
 
         payload['arguments'].execute.inArguments = [{
-            "tokens": authTokens,
+            // "tokens": authTokens,
             "userTag": userTag,
-            "emailAddress": "{{InteractionDefaults.Email}}",
-            "firstname": "{{Contact.Attribute.Test_DE_Ashley.First_Name}}"
-            // "firstnametest2": "{{InteractionDefaults.First_Name}}",
-            // "username": username
+            "description": description,
+            "clientId": '{{Contact.Attribute.SFMC_Clients.ClientID}}',
+            "contactKey": '{{Contact.Key}}',
         }];
-        
+
         payload['metaData'].isConfigured = true;
 
         // DEBUG
-        console.log('payload ' + payload);
-        console.log('payload metadata ' + payload['metaData'].isConfigured);
-        // console.log('username ' + username);
+        // console.log('payload ' + payload);
+        // console.log('payload metadata ' + payload['metaData'].isConfigured);
         connection.trigger('updateActivity', payload);
     }
 
@@ -173,9 +181,3 @@ define([
     connection.on('gotoStep', onGotoStep);
 
 });
-
-
-
-
-
-

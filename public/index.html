@@ -43,13 +43,6 @@
 
 <body>
     <div class="steps-container">
-        <!-- <div id="step1" class="step">
-            <div class="slds-grid">
-                <main class="slds-col">
-                    <h1>welcome to your activity!</h1>
-                </main>
-            </div>
-        </div> -->
         <div id="step1" class="step">
             <div class="container">
                 <div class="row">
@@ -61,7 +54,15 @@
                     <div class="col">
                         <div class="">
                             <label for="userTag">User Tag:</label>
-                            <input class="form-control" id="userTag" placeholder="Type your user tag here" row="3">
+                            <input type="text" class="form-control" id="userTag" placeholder="Type your user tag here" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="descriptionRow">
+                    <div class="col">
+                        <div class="">
+                            <label for="description">Description:</label>
+                            <textarea type="text" class="form-control" id="description" placeholder="Add your description here" row="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -69,26 +70,16 @@
         </div>
         <!-- step 2 -->
         <div id="step2" class="step">
-            <div class="row" id="dateRow">
+            <div class="row" id="Summary">
                 <div class="col">
-                    <div class="input-group date">
-                        <label for="datepicker">Please choose the message expiry date here:</label>
-                        <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <div class="">
+                        <h3>Customers will be tagged with</h3>
+                        <div id="userTag_display"></div>
+                        <div id="description_display"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- step 3 -->
-        <!-- <div id="step3" class="step">
-            <div class="row" id="Summary">
-                <div class="col">
-                    <div class="">
-                        <label for="">Here is the summary of your message:</label>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </body>
 

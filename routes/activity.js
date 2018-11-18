@@ -102,11 +102,12 @@ exports.execute = function (req, res) {
             });
 
             var userTag = decodedArgs.userTag;
-            var email = decodedArgs.emailAddress;
-            var firstname = decodedArgs.firstname;
+            var clientId = decodedArgs.clientId;
+            // var email = decodedArgs.emailAddress;
+            // var firstname = decodedArgs.firstname;
 
             // Intercom API functions create new user
-            var userId = email;
+            var userId = clientId;
 
             // Untag function 
             // client.tags.tag({

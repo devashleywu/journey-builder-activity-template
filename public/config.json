@@ -10,7 +10,7 @@
 		"en-US": {
 			"name": "Intercom Message Activity",
 			"description": "A custom Journey Builder activity to integrate with Intercom Message Activity API",
-			"step1Label": "Define Message Tag",
+			"step1Label": "Define User Tag",
 			"step2Label": "Summary"
 		}
 	},
@@ -18,6 +18,10 @@
 		"execute": {
 			"inArguments": [{
 				"emailAddress": "{{InteractionDefaults.Email}}"
+			}, {
+				"contactKey": "{{Contact.Key}}"
+			}, {
+				"clientId": "{{Contact.Attribute.SFMC_Clients.ClientID}}"
 			}],
 			"outArguments": [],
 			"url": "https://custom-activity-test0810.herokuapp.com/journeybuilder/execute",
@@ -53,13 +57,14 @@
 		}
 	},
 	"wizardSteps": [{
-		"label": "Define Message Tag",
-		"key": "step1"
-	},
-	{
-		"label": "Summary",
-		"key": "step2"
-	}],
+			"label": "Define User Tag",
+			"key": "step1"
+		},
+		{
+			"label": "Summary",
+			"key": "step2"
+		}
+	],
 	"userInterfaces": {
 		"configModal": {
 			"height": 200,
@@ -75,6 +80,20 @@
 						"dataType": "Email",
 						"isNullable": false,
 						"direction": "in"
+					}
+				}, {
+					"contactKey": {
+						"dataType": "Text",
+						"isNullable": false,
+						"direction": "In",
+						"access": "Hidden"
+					}
+				}, {
+					"clientId": {
+						"dataType": "Text",
+						"isNullable": false,
+						"direction": "In",
+						"access": "Hidden"
 					}
 				}],
 				"outArguments": []
